@@ -10,3 +10,28 @@ You must authenticate to use navitia.io. When you register we give you a authent
 There is two ways for authentication, you can use a Basic HTTP authentication, where the username is the key, and without password.
 The other method is to pass directly the key in the HTTP Authorization header like that:
 Authorization: mysecretkey
+
+
+
+URL TO USE :
+
+https://api.navitia.io/v1/journeys?from={resource_id_1}&to={resource_id_2}&datetime={datetime}
+
+https://api.navitia.io/v1/coverage/fr-idf/places?q=rue
+
+
+Itineraire STY by STEP
+
+From :
+https://api.navitia.io/v1/coverage/fr-idf/places?q=rue
+multi choix
+get first ID
+
+TO : 
+https://api.navitia.io/v1/coverage/fr-idf/places?q=rue
+multi choix
+get Second id
+
+https://api.navitia.io/v1/journeys?from={resource_id_1}&to={resource_id_2}&datetime={datetime}
+
+
