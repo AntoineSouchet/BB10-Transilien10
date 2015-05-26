@@ -1,0 +1,12 @@
+1 - URL of web services
+http://www.navitia.io/
+
+2 - Git HUB / Tuto URL for integration of WS
+https://github.com/CanalTP/navitia/blob/dev/documentation/navitia.io/source/integration.rst
+
+3 - Authentication
+
+You must authenticate to use navitia.io. When you register we give you a authentication key to the API.
+There is two ways for authentication, you can use a Basic HTTP authentication, where the username is the key, and without password.
+The other method is to pass directly the key in the HTTP Authorization header like that:
+Authorization: mysecretkey
