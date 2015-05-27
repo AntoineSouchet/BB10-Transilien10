@@ -37,6 +37,7 @@ simulator {
 config_pri_assets {
     OTHER_FILES += \
         $$quote($$BASEDIR/assets/aPropos.qml) \
+        $$quote($$BASEDIR/assets/finalItineraire.qml) \
         $$quote($$BASEDIR/assets/help.qml) \
         $$quote($$BASEDIR/assets/images/icons/check.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_add_bookmarks.png) \

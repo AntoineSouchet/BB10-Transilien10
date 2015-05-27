@@ -1,11 +1,15 @@
 import bb.cascades 1.4
 import "libs/main.js" as Main
 
+
+
+   
 Page {
-    
     
     function getid(destination,type)
     {
+        myIndicator.start();
+        myIndicator.visible = true;
         var ArrayReturn = new Array();
         var xhr = new XMLHttpRequest();
         var url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" + destination;
@@ -17,7 +21,6 @@ Page {
             
             if (xhr.readyState == 4) {
                 status = xhr.status;
-                
                 if (status == 200) {
                     data = JSON.parse(xhr.responseText);
                     var i = 0;
@@ -27,32 +30,43 @@ Page {
                         if (data.places[i].embedded_type == "stop_area"){ 
                             ArrayReturn[j] = data.places[i].id + ";" + data.places[i].name; 
                             if (type == "depart") {
-                                arrayDatamodelDepart.append({ "name":data.places[i].name,"id":data.places[i].id })
+                                arrayDatamodelDepart.append({ "name":data.places[i].name,"id":data.places[i].id });
                             }
-
+                            if (type == "arrive") {
+                                arrayDatamodelArrive.append({ "name":data.places[i].name,"id":data.places[i].id });
+                            }
+                            
                             j = j + 1;
                         }
                         i = i + 1;
                     }
-                    if (j > 0)
+                    if (j > 0 && type == "depart")
                     {
                         labelDepart.visible = false;
                         textDepart.visible = false;
                         possDepart.visible = true;
                         listDepart.visible = true;
                     }
+                    if (j > 0 && type == "arrive")
+                    {
+                        labelArrive.visible = false;
+                        textArrive.visible = false;
+                        possArrive.visible = true;
+                        listArrive.visible = true;
+                    }
+                    listDepart.dataModel = arrayDatamodelDepart;
                 } else {
-                   
-                }
                 
+                }
+                myIndicator.visible = false;
             }
         
         };
         
         xhr.send();
-        console.log("Get id finised");
         return ArrayReturn;
     }
+   
     
     titleBar: TitleBar {
         title : "Itinéraires"
@@ -73,51 +87,53 @@ Page {
         }
         Label {
             id: possDepart
-            text: "Merci de choisir la possibilité de départ"
+            text: "Plusieurs choix possible, merci de séléctionner l'emplacement :"
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            multiline: true
             visible: false
         }
         ListView {
-            preferredHeight: 150
             id: listDepart
-            dataModel: ArrayDataModel {
+            dataModel: ArrayDataModel  {
                 id: arrayDatamodelDepart
+                objectName: "name"
             }
             listItemComponents: [
                 ListItemComponent {
-                    type: "listItem"
-                    content : Container {
-                        layout: StackLayout {
-                            orientation: LayoutOrientation.TopToBottom
-                        }           
-                        Label {
-                            id:idDepart
-                            text: ListItemData.id
-                            visible: false
-                        }
-                        Label {
-                            id:nameDepart
-                            text: ListItemData.name
-                        }
+                    type: ""
+                   StandardListItem {
+                       title: ListItemData.name
+                   }                        
                     }
-                }
-//                    ListItemComponent {
-//                        type: "item"
-//                        StandardListItem {
-//                            title: ListItemData.id
-//                            description: ListItemData.name
-//                            status: "OK"
-//                        }
-//    
-//                }
                 ]
+
                 onTriggered: {
                     var selectedItem = dataModel.data(indexPath);
-                    console.log("Id : " + selectedItem.id);
-                    console.log("Name "+ selectedItem.name);
+                    departFinal.text = selectedItem.name
+                    idDepartFinal.text = selectedItem.id
+                    departFinal.visible = true
+                    labelDepart.visible = true
+                    listDepart.visible = false
+                    possDepart.visible = false
                 }
         }
-        
+        onCreationCompleted: {
+            listDepart.dataModel = arrayDatamodelDepart;
+        }
         Label {
+            id: departFinal
+            visible: false
+            enabled: false
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+        }
+        Label {
+            id : idDepartFinal
+            visible: false
+        }
+        Label {
+            id : labelArrive
             text : "Arrivé : "
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
@@ -127,16 +143,110 @@ Page {
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
         }
+        Label {
+            id: possArrive
+            text: "Plusieurs choix possible, merci de séléctionner l'emplacement :"
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            multiline: true
+            visible: false
+        }
+        ListView {
+            id: listArrive
+            dataModel: ArrayDataModel  {
+                id: arrayDatamodelArrive
+                objectName: "name"
+            }
+            listItemComponents: [
+                ListItemComponent {
+                    type: ""
+                    StandardListItem {
+                        title: ListItemData.name
+                    }                        
+                }
+            ]
+            
+            onTriggered: {
+                var selectedItem = dataModel.data(indexPath);
+                arriveFinal.text = selectedItem.name
+                idArriveFinal.text = selectedItem.id
+                arriveFinal.visible = true
+                labelArrive.visible = true
+                listArrive.visible = false
+                possArrive.visible = false
+            }
+        }
+        ActivityIndicator {
+            id: myIndicator
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            minHeight: 200
+            minWidth: 200
+            visible: false
+            accessibility.name: "myIndicator"
+        }
+//        onCreationCompleted: {
+//            listDepart.dataModel = arrayDatamodelDepart;
+//        }
+        Label {
+            id: arriveFinal
+            visible: false
+            enabled: false
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+        }
+        Label {
+            id : idArriveFinal
+            visible: false
+        }
         Button {
             id: valide
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
             text: "Go "
             onClicked: {
-                getid(textDepart.text,"depart");
-                getid(textArrive.text,"arrive");
+                if (textDepart.visible == true && textArrive.visible == true)
+                {
+                    getid(textDepart.text,"depart");
+                    getid(textArrive.text,"arrive");
+                    return false;
+                }
+
+                if (textDepart.visible == false & textArrive.visible == false)
+                {
+                    console.log("Go itineraire !!!!!");
+                    var page = itiFinal.createObject();
+                    page.idDepartIti = idDepartFinal.text
+                    page.idArriveIti = idArriveFinal.text
+                    nav.push(page);
+                    //go itineraire !
+                }
             }
         }
         
     }
+    actions: [                         
+        
+        ActionItem {
+            title: "Nouveau"
+            ActionBar.placement: ActionBarPlacement.Signature
+            imageSource: "asset:///images/icons/ic_forward.png"
+            onTriggered: {
+                    idArriveFinal.visible = false
+                    arriveFinal.visible = false
+                    labelArrive.visible = true
+                    textArrive.visible = true
+                    
+                    idDepartFinal.visible = false
+                    departFinal.visible = false
+                    labelDepart.visible = true
+                    textDepart.visible = true 
+            }
+        }]
+    attachedObjects: [
+        ComponentDefinition {
+            id: itiFinal
+            source: "finalItineraire.qml"
+        }]
 }
+
