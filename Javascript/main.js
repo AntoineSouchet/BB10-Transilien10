@@ -8,8 +8,21 @@ function load()
 	// var idTo = getid("Antony");
 	// alert(idFrom[0]);
 	// alert(idTo[0]);
+	//var itineraire = getRoute(null,null);
+	//alert(itineraire[1]);
+	//alert(getPerubation());
+}
+
+
+function testAllFunction()
+{
+	var idFrom = getid("Massy");
+	var idTo = getid("Antony");
+	alert(idFrom[0]);
+	alert(idTo[0]);
 	var itineraire = getRoute(null,null);
 	alert(itineraire[1]);
+	alert(getPerubation());
 }
 
 /* Get if of station */
@@ -69,6 +82,7 @@ function getRoute(idFrom,idTo,dateIti)
                if (status == 200) {
                    data = JSON.parse(xhr.responseText);
 				   var i = 0;
+				   RequeteDate = data.journeys[0].requested_date_
 				   DateArrive = data.journeys[0].arrival_date_time;
 				   while (i < getLength(data.journeys[0].sections))
 				   {
@@ -95,6 +109,43 @@ function plugToInterface(Date,Itineraire)
 {
 
 }
+
+function getPerubation()
+{
+	var Error = "";
+	var xhr = new XMLHttpRequest();
+	var url = "https://api.navitia.io/v1/coverage/fr-idf/networks/network:RER/traffic_reports";
+	xhr.open("GET",url,false);
+	xhr.setRequestHeader("Authorization", "Basic " + Base64.encode(keyString + ":" + null)); 
+	xhr.onreadystatechange = function() {
+           var status;
+           var data;
+
+           if (xhr.readyState == 4) {
+               status = xhr.status;
+ 
+               if (status == 200) {
+                   data = JSON.parse(xhr.responseText);
+				   if (data.error.message = "no solution found for this disruption")
+				   {
+				   Error = "Aucun probléme detecté par navitia sur le réseau";
+				   }
+				   else
+				   {
+				   Error = data.error.message;
+				   }
+               } else {
+					alert("error");
+               }
+           }
+		   
+       };
+
+        xhr.send();
+		return Error;
+}
+
+
 function getLength(obj) {
     var i = 0, key;
     for (key in obj) {
