@@ -1,4 +1,4 @@
-APP_NAME = RATP
+APP_NAME = Transilien
 
 CONFIG += qt warn_on cascades10
 

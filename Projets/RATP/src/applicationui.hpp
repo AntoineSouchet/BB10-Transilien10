@@ -23,6 +23,9 @@
 #include <QtLocationSubset/QGeoPositionInfo>
 #include <QtLocationSubset/QGeoPositionInfoSource>
 #include <QtNetwork>
+#include <bb/platform/bbm/Context>
+#include <bb/platform/bbm/MessageService>
+#include <bb/platform/bbm/UserProfile>
 
 using namespace QtMobilitySubset;
 namespace bb
@@ -51,14 +54,26 @@ public:
     Q_INVOKABLE void MoreNear(double latitude,double longitude,QString adresse);
     Q_INVOKABLE void positionUpdated(QGeoPositionInfo geoPositionInfo);
     Q_INVOKABLE QString startGPS();
+    Q_INVOKABLE void BBWorld();
+    Q_INVOKABLE
+        void inviteUserToDownloadViaBBM();
+        Q_INVOKABLE
+        void updatePersonalMessage(const QString &message);
 private slots:
     void onSystemLanguageChanged();
 private:
+
     QTranslator* m_pTranslator;
     bb::cascades::LocaleHandler* m_pLocaleHandler;
     QGeoPositionInfoSource *locationDataSource;
     QString lat;
     QString longi;
+    bb::platform::bbm::UserProfile * m_userProfile;
+           bb::platform::bbm::Context *m_context;
+           bb::platform::bbm::MessageService *m_messageService;
+           Q_SLOT
+           void registrationStateUpdated(
+                   bb::platform::bbm::RegistrationState::Type state);
 };
 
 #endif /* ApplicationUI_HPP_ */

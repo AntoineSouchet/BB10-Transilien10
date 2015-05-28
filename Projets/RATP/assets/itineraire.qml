@@ -10,6 +10,7 @@ Page {
     {
         myIndicator.start();
         myIndicator.visible = true;
+        go.enabled = false;
         var ArrayReturn = new Array();
         var xhr = new XMLHttpRequest();
         var url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" + destination;
@@ -58,6 +59,7 @@ Page {
                 } else {
                 
                 }
+                go.enabled = true;
                 myIndicator.visible = false;
             }
         
@@ -151,6 +153,15 @@ Page {
             multiline: true
             visible: false
         }
+        ActivityIndicator {
+            id: myIndicator
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            minHeight: 200
+            minWidth: 200
+            visible: false
+            accessibility.name: "myIndicator"
+        }
         ListView {
             id: listArrive
             dataModel: ArrayDataModel  {
@@ -174,20 +185,13 @@ Page {
                 labelArrive.visible = true
                 listArrive.visible = false
                 possArrive.visible = false
+                textDepart.text = "";
+                textArrive.text = "";
+                arrayDatamodelDepart.clear();
+                arrayDatamodelArrive.clear();
             }
         }
-        ActivityIndicator {
-            id: myIndicator
-            horizontalAlignment: HorizontalAlignment.Center
-            verticalAlignment: VerticalAlignment.Center
-            minHeight: 200
-            minWidth: 200
-            visible: false
-            accessibility.name: "myIndicator"
-        }
-//        onCreationCompleted: {
-//            listDepart.dataModel = arrayDatamodelDepart;
-//        }
+
         Label {
             id: arriveFinal
             visible: false
@@ -199,48 +203,59 @@ Page {
             id : idArriveFinal
             visible: false
         }
-        Button {
-            id: valide
-            horizontalAlignment: HorizontalAlignment.Center
-            verticalAlignment: VerticalAlignment.Center
-            text: "Go "
-            onClicked: {
-                if (textDepart.visible == true && textArrive.visible == true)
-                {
-                    getid(textDepart.text,"depart");
-                    getid(textArrive.text,"arrive");
-                    return false;
-                }
 
-                if (textDepart.visible == false & textArrive.visible == false)
-                {
-                    console.log("Go itineraire !!!!!");
-                    var page = itiFinal.createObject();
-                    page.idDepartIti = idDepartFinal.text
-                    page.idArriveIti = idArriveFinal.text
-                    nav.push(page);
-                    //go itineraire !
-                }
-            }
-        }
         
+    }
+    onCreationCompleted: {
+        go.enabled = true
     }
     actions: [                         
         
+
         ActionItem {
             title: "Nouveau"
             ActionBar.placement: ActionBarPlacement.Signature
+            imageSource: "asset:///images/icons/ic_edit.png"
+            onTriggered: {
+               idArriveFinal.visible = false
+               arriveFinal.visible = false
+               labelArrive.visible = true
+               textArrive.visible = true
+               
+               idDepartFinal.visible = false
+               departFinal.visible = false
+               labelDepart.visible = true
+               textDepart.visible = true 
+            }
+        },
+        ActionItem {
+            id: go
+            title: "Go"
+            ActionBar.placement: ActionBarPlacement.Signature
             imageSource: "asset:///images/icons/ic_forward.png"
             onTriggered: {
-                    idArriveFinal.visible = false
-                    arriveFinal.visible = false
-                    labelArrive.visible = true
-                    textArrive.visible = true
+                
+                horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Center
+                text: "Go "
+                onClicked: {
+                    if (textDepart.visible == true && textArrive.visible == true)
+                    {
+                        getid(textDepart.text,"depart");
+                        getid(textArrive.text,"arrive");
+                        return false;
+                    }
                     
-                    idDepartFinal.visible = false
-                    departFinal.visible = false
-                    labelDepart.visible = true
-                    textDepart.visible = true 
+                    if (textDepart.visible == false & textArrive.visible == false)
+                    {
+                        console.log("Go itineraire !!!!!");
+                        var page = itiFinal.createObject();
+                        page.idDepartIti = idDepartFinal.text
+                        page.idArriveIti = idArriveFinal.text
+                        nav.push(page);
+                        //go itineraire !
+                    }
+                }
             }
         }]
     attachedObjects: [

@@ -4,6 +4,7 @@ var keyString = "beda440f-b845-4b65-a683-fecb617a214f";
 	XHR send to get ID 100% OK */
 function load()
 {
+	getRoute(null,null);
 	// var idFrom = getid("Massy");
 	// var idTo = getid("Antony");
 	// alert(idFrom[0]);
@@ -66,7 +67,8 @@ function getRoute(idFrom,idTo,dateIti)
 {
 	var xhr = new XMLHttpRequest();
 	//var url = "https://api.navitia.io/v1/journeys?from=" + idFrom + "&to=" + idTo + "&datetime=" + dateIti;
-	var url = "https://api.navitia.io/v1/journeys?from=stop_area:RTP:SA:1809&to=stop_area:RTP:SA:2045";
+	//var url = "https://api.navitia.io/v1/journeys?from=stop_area:RTP:SA:1809&to=stop_area:RTP:SA:2045";
+	var url = "https://api.navitia.io/v1/journeys?from=stop_area:RTP:SA:1809&to=stop_area:RTP:SA:1846";
 	var Itineraire = new Array();
 	var DateArrive = "";
 	var RequeteDate =  "";
@@ -75,7 +77,9 @@ function getRoute(idFrom,idTo,dateIti)
 	xhr.onreadystatechange = function() {
            var status;
            var data;
-
+			var type = "";
+			var temps = "";
+			document.getElementById("montest").innerHTML = "";
            if (xhr.readyState == 4) { // `DONE`
                status = xhr.status;
  
@@ -84,25 +88,66 @@ function getRoute(idFrom,idTo,dateIti)
 				   var i = 0;
 				   RequeteDate = data.journeys[0].requested_date_
 				   DateArrive = data.journeys[0].arrival_date_time;
+				   //Itineraire[i] = Itineraire[i] + "<b>Temps du trajet estimé : </b>" + data.journeys[0].duration / 60 + " minutes."
 				   while (i < getLength(data.journeys[0].sections))
 				   {
-						Itineraire[i] = data.journeys[0].sections[i].from.name + ";" + data.journeys[0].sections[i].to.name + ";" + data.journeys[0].sections[i].type;
-						if (data.journeys[0].sections[i].type == "public_transport")
+				   temps = Math.round(data.journeys[0].duration / 60);
+				   Itineraire[i] = "";
+				   if (data.journeys[0].sections[i].type == "crow_fly")
+				   {
+							i = i + 1;
+					}
+					else
+					{
+						if (data.journeys[0].sections[i].type == "waiting")
 						{
-						Itineraire[i] = Itineraire[i] + "; Direction : " + data.journeys[0].sections[i].display_informations.direction + ";" + data.journeys[0].sections[i].display_informations.network + ";" + data.journeys[0].sections[i].display_informations.code + ";" + data.journeys[0].sections[i].display_informations.color;
+						Itineraire[i] = Itineraire[i] + "<br />Attendre environ : " + data.journeys[0].sections[i].duration / 60 + " minutes";
 						}
-						i = i + 1;
+						else
+						{
+							if (data.journeys[0].sections[i].type == "public_transport")
+							{
+								Itineraire[i] =  Itineraire[i] + "<br /><br /> <b>Partir de : </b>" + data.journeys[0].sections[i].from.name 
+								+ "(" + data.journeys[0].sections[i].from.stop_point.comment + ") <br /><b>vers </b>" 
+								+ data.journeys[0].sections[i].to.name + "(" + data.journeys[0].sections[i].to.stop_point.comment + ") .";
+								Itineraire[i] = Itineraire[i] + "<br /><b>Prendre : </b><font color='" + data.journeys[0].sections[i].display_informations.color + "'><b>" + data.journeys[0].sections[i].display_informations.network + " " + data.journeys[0].sections[i].display_informations.code + "</b></font><br /> <b>en direction de : </b>" + data.journeys[0].sections[i].display_informations.direction + " <br />";
+							}
+							if (data.journeys[0].sections[i].type == "street_network")
+							{
+								Itineraire[i] =  Itineraire[i] + "<br /><br />Marché de : " + data.journeys[0].sections[i].from.name + " vers " + data.journeys[0].sections[i].to.name + " pendant " + Math.round(data.journeys[0].sections[i].duration / 60) + " minutes." ;
+							}
+							}
+							
+							i = i + 1;
+						}
+						if(typeof Itineraire[x] != 'undefined')
+						{
+						Itineraire[i] = Itineraire[i] + "<br /><br />";
+						console.log(i);
+						}
+
+						
+				   }
+
+
 				   }
                    
                } else {
 					alert("error");
                }
+			   var x = 0;
+			   console.log(document.getElementById("montest").innerHTML);
+			   document.getElementById("montest").innerHTML = "Temps du trajet : " + temps + " minutes";
+			   while (x < Itineraire.length)
+			   {
+				document.getElementById("montest").innerHTML = document.getElementById("montest").innerHTML + Itineraire[x];
+				x = x + 1;
+			   }
            }
-		   
-       };
-       xhr.send();
+		          xhr.send();
 	   plugToInterface(DateArrive,Itineraire);
-}
+       };
+
 
 /* Link to QML interface */
 function plugToInterface(Date,Itineraire)

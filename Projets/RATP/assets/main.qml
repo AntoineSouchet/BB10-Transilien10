@@ -41,18 +41,10 @@ NavigationPane {
     Menu.definition: MenuDefinition {        
         actions: [
             ActionItem {
-                title: "Aide"
-                imageSource: "asset:///images/icons/ic_help.png"
-                onTriggered: {
-                 //   var page = proposPages.createObject();
-                   // nav.push(page);
-                }
-            },
-            ActionItem {
                 title: "Noter"
                 imageSource: "asset:///images/icons/ic_add_bookmarks.png"
                 onTriggered: {
-                //    ApplicationUI.BBWorld();
+                    _applicationUI.BBWorld();
                 }
             },
             ActionItem {
@@ -74,7 +66,7 @@ Page {
     Container {
         id:root
         Label {
-            text:"Bienvenue dans l'application RATP Blackberry 10."
+            text:"Bienvenue dans l'application Transilien 10 pour BlackBerry."
             minHeight: 15
             multiline: true
             verticalAlignment: VerticalAlignment.Center
@@ -133,6 +125,13 @@ Page {
                 nav.push(page);
             }
         },
+        ActionItem {
+            title: "BBM Status"
+            imageSource: "asset:///images/icons/ic_edit_profile.png"
+            onTriggered: {
+                _applicationUI.updatePersonalMessage("Utilise l'application Transilien 10.")
+            }
+        },
         InvokeActionItem {
             
             query {
@@ -140,7 +139,7 @@ Page {
                 invokeActionId: "bb.action.SHARE"
             }
             onTriggered: {
-                data = "J'ai utilisé l'application RATP pour BlackBerry 10 !";
+                data = "J'utilise l'application Transilien 10 pour BlackBerry !";
             }
         }
         

@@ -38,11 +38,12 @@ config_pri_assets {
     OTHER_FILES += \
         $$quote($$BASEDIR/assets/aPropos.qml) \
         $$quote($$BASEDIR/assets/finalItineraire.qml) \
-        $$quote($$BASEDIR/assets/help.qml) \
         $$quote($$BASEDIR/assets/images/icons/check.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_add_bookmarks.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_bbm.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_contact.png) \
+        $$quote($$BASEDIR/assets/images/icons/ic_edit.png) \
+        $$quote($$BASEDIR/assets/images/icons/ic_edit_profile.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_forward.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_help.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_history.png) \
@@ -50,6 +51,19 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/icons/ic_move.png) \
         $$quote($$BASEDIR/assets/images/logo.jpg) \
         $$quote($$BASEDIR/assets/images/logo_navitia-io.png) \
+        $$quote($$BASEDIR/assets/images/logos/1024x600.png) \
+        $$quote($$BASEDIR/assets/images/logos/110x110.png) \
+        $$quote($$BASEDIR/assets/images/logos/1440x1440.png) \
+        $$quote($$BASEDIR/assets/images/logos/144x144.png) \
+        $$quote($$BASEDIR/assets/images/logos/480x480.png) \
+        $$quote($$BASEDIR/assets/images/logos/720x1280.png) \
+        $$quote($$BASEDIR/assets/images/logos/720x720.png) \
+        $$quote($$BASEDIR/assets/images/logos/768x1280.png) \
+        $$quote($$BASEDIR/assets/images/logos/86x86.png) \
+        $$quote($$BASEDIR/assets/images/logos/90x90.png) \
+        $$quote($$BASEDIR/assets/images/logos/96x96.png) \
+        $$quote($$BASEDIR/assets/images/logos/Feature-Image-1920x1186.png) \
+        $$quote($$BASEDIR/assets/images/logos/RATP.png) \
         $$quote($$BASEDIR/assets/itineraire.qml) \
         $$quote($$BASEDIR/assets/libs/main.js) \
         $$quote($$BASEDIR/assets/main.qml) \
@@ -84,6 +98,9 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/images/icons/*.qml) \
         $$quote($$BASEDIR/../assets/images/icons/*.js) \
         $$quote($$BASEDIR/../assets/images/icons/*.qs) \
+        $$quote($$BASEDIR/../assets/images/logos/*.qml) \
+        $$quote($$BASEDIR/../assets/images/logos/*.js) \
+        $$quote($$BASEDIR/../assets/images/logos/*.qs) \
         $$quote($$BASEDIR/../assets/libs/*.qml) \
         $$quote($$BASEDIR/../assets/libs/*.js) \
         $$quote($$BASEDIR/../assets/libs/*.qs)
