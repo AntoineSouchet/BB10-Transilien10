@@ -33,7 +33,7 @@ Page {
                     while (i < Main.getLength(data.journeys[0].sections))
                     {
                         temps = Math.round(data.journeys[0].duration / 60);
-                        Itineraire[i] = "<body style=\"height: 100%;style='text-align: justify;line-height: 200%;text-justify: inter-word;\">";
+                        Itineraire[i] = "<body style=\"height: 100%;style='text-align: justify;line-height: 200%;text-justify: inter-word;font-size:2em;\">";
                         if (data.journeys[0].sections[i].type == "crow_fly")
                         {
                             i = i + 1;
@@ -42,20 +42,40 @@ Page {
                         {
                             if (data.journeys[0].sections[i].type == "waiting")
                             {
-                            Itineraire[i] = Itineraire[i] + "<span style='font-size:2em;'><br />Attendre environ : </font>" + Math.round(data.journeys[0].sections[i].duration / 60) + " minutes</span><HR width=100% noshade size=1>";
+                                Itineraire[i] = Itineraire[i] + "<span style='font-size:2em;'><br /><center>Attendre environ : <b>" + Math.round(data.journeys[0].sections[i].duration / 60) + "</b> minutes</center></span>";
                             }
                             else
                             {
                                 if (data.journeys[0].sections[i].type == "public_transport")
                                 {
-                                    Itineraire[i] =  Itineraire[i] + "<span style='font-size:2em;'><br /><br /><b>Partir de : </b>" + data.journeys[0].sections[i].from.name 
-                                    + "(" + data.journeys[0].sections[i].from.stop_point.comment + ") <br /><b>vers </b>" 
-                                    + data.journeys[0].sections[i].to.name + "(" + data.journeys[0].sections[i].to.stop_point.comment + ") .";
-                                    Itineraire[i] = Itineraire[i] + "<br /><b>Prendre : </b><span style='color:#" + data.journeys[0].sections[i].display_informations.color + "'><b>" + data.journeys[0].sections[i].display_informations.network + " " + data.journeys[0].sections[i].display_informations.code + "</b></span><b><br />en direction de : </b>" + data.journeys[0].sections[i].display_informations.direction + " </span><br /><HR width=100% noshade size=1>";
+                                    Itineraire[i] =  Itineraire[i]
+                                    + "<table><tr><td><b><span style='font-size:2em;'>Partir de </b></td><td><span style='font-size:2em;'>" + data.journeys[0].sections[i].from.name 
+                                    + "</tr></td><tr><td><b><span style='font-size:2em;'>Vers </b></td><td><span style='font-size:2em;'>" 
+                                    + data.journeys[0].sections[i].to.name + "</td></tr>";
+                                    Itineraire[i] = Itineraire[i] 
+                                    + "<tr><td><span style='font-size:2em;'><b>Prendre </b></td><td><span style='font-size:2em;'><font color='" + data.journeys[0].sections[i].display_informations.color + "'><b>" 
+                                    + data.journeys[0].sections[i].display_informations.network 
+                                    + " " 
+                                    + data.journeys[0].sections[i].display_informations.code 
+                                    + "</td></tr><tr><td><span style='font-size:2em;'></b></font><b>En direction de </td><td><span style='font-size:2em;'></b>" 
+                                    + data.journeys[0].sections[i].display_informations.direction 
+                                    + "</td></tr></table></span><br />";
+                                   // Itineraire[i] =  Itineraire[i] + "<span style='font-size:2em;'><br /><br /><b>Partir de : </b>" + data.journeys[0].sections[i].from.name 
+                                   // + "(" + data.journeys[0].sections[i].from.stop_point.comment + ") <br /><b>vers </b>" 
+                                   // + data.journeys[0].sections[i].to.name + "(" + data.journeys[0].sections[i].to.stop_point.comment + ") .";
+                                   // Itineraire[i] = Itineraire[i] + "<br /><b>Prendre : </b><span style='color:#" + data.journeys[0].sections[i].display_informations.color + "'><b>" + data.journeys[0].sections[i].display_informations.network + " " + data.journeys[0].sections[i].display_informations.code + "</b></span><b><br />en direction de : </b>" + data.journeys[0].sections[i].display_informations.direction + " </span><br /><HR width=100% noshade size=1>";
                                 }
                                 if (data.journeys[0].sections[i].type == "street_network")
                                 {
-                                    Itineraire[i] =  Itineraire[i] + "<br /><br /><span style='font-size:2em;'>Marcher de : " + data.journeys[0].sections[i].from.name + " vers " + data.journeys[0].sections[i].to.name + " pendant " + Math.round(data.journeys[0].sections[i].duration / 60) + " minutes.</span><HR width=100% noshade size=1>" ;
+                                    Itineraire[i] =  Itineraire[i] 
+                                    + "<table><tr><td><span style='font-size:2em;'><b>Marché de<b></td><td><span style='font-size:2em;'>" 
+                                    + data.journeys[0].sections[i].from.name + "</td></tr>"
+                                    + "<tr><td><span style='font-size:2em;'><b>Vers</b></td><td><span style='font-size:2em;'>" 
+                                    + data.journeys[0].sections[i].to.name + "</td></tr>"
+                                    + "<tr><td><span style='font-size:2em;'><b>Pendant</b></td><span style='font-size:2em;'><td>" 
+                                    + Math.round(data.journeys[0].sections[i].duration / 60) 
+                                    + " minutes.</td></tr></table>" ;
+                                    //Itineraire[i] =  Itineraire[i] + "<br /><br /><span style='font-size:2em;'>Marcher de : " + data.journeys[0].sections[i].from.name + " vers " + data.journeys[0].sections[i].to.name + " pendant " + Math.round(data.journeys[0].sections[i].duration / 60) + " minutes.</span><HR width=100% noshade size=1>" ;
                                 }
                             }
 
@@ -77,19 +97,20 @@ Page {
                 
             }
             var x = 0;
-            affichage.html = "<center><span style='font-size:2em;'>Estimation du temps de trajet : " + temps + " minutes</span></center><HR width=100% noshade size=1>";
+            affichage.html = "<center><span style='font-size:2em;'><center><b><img src=\"local:///assets/images/logos/86x86.png\" style='vertical-align:middle;'/>Temps du trajet :</b> " + temps + " minutes</center></span></center>";
             while (x < Itineraire.length)
             {
             affichage.html = affichage.html + Itineraire[x];
                 x = x + 1;
             }
+            affichage.html = "<head><style>table { border-collapse: collapse;width:100%; } td { width:30%; border: 1px solid black;text-align:center; vertical-align:middle;padding: 5px;}</style></head>" + affichage.html;
             affichage.html = affichage.html + "</body>";
         }
         xhr.send();
     }
     
     titleBar: TitleBar {
-        title : "Votre itineraires"
+        title : "Votre itineraire"
     }
     
     Container {
