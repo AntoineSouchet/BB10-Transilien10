@@ -1,18 +1,24 @@
 import bb.cascades 1.4
+import bb.system 1.0
 import "libs/main.js" as Main
 
 
 NavigationPane { 
     
     function getNear() {
+
         console.log("getNear");
         var position = _applicationUI.startGPS();
         var arrayPos = position.split(";");
         var lat = arrayPos[0];
         var longi = arrayPos[1];
+        if (lat == "" && longi == "")
+        {
+            errorToast.body = "Impossible de géolocaliser votre BlackBerry.";
+            return false;
+        }
         var xhr = new XMLHttpRequest();
         var url = "https://api.navitia.io/v1/coverage/fr-idf/coords/" + longi +";" + lat + "/places_nearby";
-        console.log(url);
         xhr.open("GET",url,true);
         xhr.setRequestHeader("Authorization", "Basic " + Main.Base64.encode(Main.keyString + ":" + null)); 
         xhr.onreadystatechange = function() {
@@ -21,16 +27,38 @@ NavigationPane {
             console.log(xhr.readyState);
             if (xhr.readyState == 4) {
                 status = xhr.status;
-                console.log(status);
                 if (status == 200) {
-                    console.log(status);
+                    myIndicator.visible = true;
                     data = JSON.parse(xhr.responseText);
-                    var nearLat = data.places_nearby[0].stop_point.coord.lat;
-                    var nearLong = data.places_nearby[0].stop_point.coord.lat;
-                    var addresse = data.places_nearby[0].stop_point.name;
-                    _applicationUI.MoreNear(nearLat, nearLong, addresse);
+                    var i = 0;
+                    while (i < Main.getLength(data.places_nearby))
+                    {
+                        if (data.places_nearby[i].embedded_type == "stop_point")
+                        {
+                            var nearLat = data.places_nearby[0].stop_point.coord.lat;
+                            var nearLong = data.places_nearby[0].stop_point.coord.lon;   
+                            var addresse = data.places_nearby[0].stop_point.name;
+                            _applicationUI.MoreNear(nearLat, nearLong, addresse);
+                            myIndicator.visible = false;
+                            return false;
+                            i = i + 1;
+                        }
+                        else 
+                        {
+                            i = i + 1;
+                        }
+                    }
+                    if (i == Main.getLength(data.places_nearby))
+                    {
+                        errorToast.body = "Aucune station proche de votre emplacement.";
+                        myIndicator.visible = false;
+                        return false;
+                    }
+
                 } else {
-                
+                    errorToast.body = "Impossible de récupérer les informations nécéssaires.";
+                    myIndicator.visible = false;
+                    return false;
                 }
             }
         };
@@ -92,10 +120,22 @@ Page {
             scalingMethod: ScalingMethod.None
             loadEffect: ImageViewLoadEffect.FadeZoom
         }
+        ActivityIndicator {
+            id: myIndicator
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            minHeight: 200
+            minWidth: 200
+            visible: false
+            accessibility.name: "myIndicator"
+        }
+
         
     }
     onCreationCompleted: {
         _applicationUI.startGPS();
+        myIndicator.start();
+        myIndicator.visible = false;
     }
     actions: [                         
         
@@ -132,6 +172,13 @@ Page {
                 _applicationUI.updatePersonalMessage("Utilise l'application Transilien 10.")
             }
         },
+        ActionItem {
+            title: "Notre facebook"
+            imageSource: "asset:///images/icons/Facebook_Logo_Button_128_96x96.png"
+            onTriggered: {
+                _applicationUI.facebookOpen();
+            }
+        },
         InvokeActionItem {
             
             query {
@@ -152,6 +199,10 @@ Page {
     ComponentDefinition {
         id: itinerairePage
         source: "itineraire.qml"
+    },
+    SystemToast {
+        id: errorToast
+        body: ""
     },
     ComponentDefinition {
         id : proposPage

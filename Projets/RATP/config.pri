@@ -38,7 +38,10 @@ config_pri_assets {
     OTHER_FILES += \
         $$quote($$BASEDIR/assets/aPropos.qml) \
         $$quote($$BASEDIR/assets/finalItineraire.qml) \
+        $$quote($$BASEDIR/assets/images/icons/Facebook_Logo_Button_128.png) \
+        $$quote($$BASEDIR/assets/images/icons/Facebook_Logo_Button_128_96x96.png) \
         $$quote($$BASEDIR/assets/images/icons/check.png) \
+        $$quote($$BASEDIR/assets/images/icons/facebook.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_add_bookmarks.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_bbm.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_contact.png) \

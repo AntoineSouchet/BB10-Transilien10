@@ -101,7 +101,7 @@ void ApplicationUI::BBWorld()
 
     request.setTarget("sys.appworld");
     request.setAction("bb.action.OPEN");
-    request.setUri(QUrl("appworld://content/59952277"));
+    request.setUri(QUrl("appworld://content/59962284"));
     invokeManager.invoke(request);
 }
 
@@ -191,9 +191,10 @@ void ApplicationUI::MoreNear(double latitude,double longitude,QString adresse)
         QVariantMap navendData;
         navendData["latitude"] = latitude;
         navendData["longitude"] = longitude;
-        navendData["properties.name"] = "AutoLib'";
+        navendData["properties.name"] = "Station'";
         navendData["properties.description"] = adresse;
 
+           qDebug() << latitude;
         QVariantMap data;
         data["view_mode"] = "nav";
         data["nav_end"] = navendData;
@@ -233,3 +234,34 @@ void ApplicationUI::Map(double latitude,double longitude,QString adresse)
         request.setData(buffer);
         invokeManager.invoke(request);
     }
+
+void ApplicationUI::facebookOpen()
+{
+    InvokeManager invokeManager;
+    InvokeRequest request;
+
+    QVariantMap payload;
+
+    payload["object_type"] = "page";
+    payload["object_id"] = "1445927862368841";  // BlackBerry NA Facebook page
+
+    request.setMetadata(payload);
+    request.setTarget("com.rim.bb.app.facebook");
+
+    request.setAction("bb.action.OPEN");
+
+
+    invokeManager.invoke(request);
+}
+
+//void ApplicationUI::TwitterOpen()
+//{
+//    InvokeManager invokeManager;
+//    InvokeRequest request;
+//
+//    request.setTarget("com.twitter.urihandler");
+//    request.setAction("bb.action.VIEW");
+//    request.setUri("twitter:connect:blackberry10_fr");
+//
+//    invokeManager.invoke(request);
+//}

@@ -55,6 +55,7 @@ public:
     Q_INVOKABLE void positionUpdated(QGeoPositionInfo geoPositionInfo);
     Q_INVOKABLE QString startGPS();
     Q_INVOKABLE void BBWorld();
+    Q_INVOKABLE void facebookOpen();
     Q_INVOKABLE
         void inviteUserToDownloadViaBBM();
         Q_INVOKABLE

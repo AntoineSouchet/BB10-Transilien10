@@ -1,9 +1,7 @@
 import bb.cascades 1.4
+import bb.system 1.0
 import "libs/main.js" as Main
 
-
-
-   
 Page {
     
     function getid(destination,type)
@@ -56,6 +54,7 @@ Page {
                         listArrive.visible = true;
                     }
                     listDepart.dataModel = arrayDatamodelDepart;
+                    listArrive.enabled = false;
                 } else {
                 
                 }
@@ -118,6 +117,7 @@ Page {
                     labelDepart.visible = true
                     listDepart.visible = false
                     possDepart.visible = false
+                    listArrive.enabled = true;
                 }
         }
         onCreationCompleted: {
@@ -185,8 +185,8 @@ Page {
                 labelArrive.visible = true
                 listArrive.visible = false
                 possArrive.visible = false
-                textDepart.text = "";
-                textArrive.text = "";
+                textDepart.text = "DISABLE";
+                textArrive.text = "DISABLE";
                 arrayDatamodelDepart.clear();
                 arrayDatamodelArrive.clear();
             }
@@ -226,6 +226,9 @@ Page {
                departFinal.visible = false
                labelDepart.visible = true
                textDepart.visible = true 
+               textDepart.text = "";
+               textArrive.text = "";
+               
             }
         },
         ActionItem {
@@ -237,8 +240,20 @@ Page {
                 
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
-                text: "Go "
+                text: "Go"
                 onClicked: {
+                    if (textDepart.text == "")
+                    {
+                        emptyToast.body = "Merci de saisir un lieu de départ.";
+                        emptyToast.show();
+                        return false;
+                    }
+                    if (textArrive.text == "")
+                    {
+                        emptyToast.body = "Merci de saisir un lieu d'arrivé.";
+                        emptyToast.show();
+                        return false;
+                    }
                     if (textDepart.visible == true && textArrive.visible == true)
                     {
                         getid(textDepart.text,"depart");
@@ -248,15 +263,20 @@ Page {
                     
                     if (textDepart.visible == false & textArrive.visible == false)
                     {
-                        console.log("Go itineraire !!!!!");
                         var page = itiFinal.createObject();
                         page.idDepartIti = idDepartFinal.text
                         page.idArriveIti = idArriveFinal.text
                         nav.push(page);
-                        //go itineraire !
                     }
                 }
+                
             }
+            attachedObjects: [
+                SystemToast {
+                    id: emptyToast
+                    body: ""
+                }
+            ]
         }]
     attachedObjects: [
         ComponentDefinition {

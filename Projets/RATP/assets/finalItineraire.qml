@@ -29,7 +29,6 @@ Page {
                     var i = 0;
                     RequeteDate = data.journeys[0].requested_date_
                     DateArrive = data.journeys[0].arrival_date_time;
-                    //Itineraire[i] = Itineraire[i] + "<b>Temps du trajet estimé : </b>" + data.journeys[0].duration / 60 + " minutes."
                     while (i < Main.getLength(data.journeys[0].sections))
                     {
                         temps = Math.round(data.journeys[0].duration / 60);
@@ -60,10 +59,6 @@ Page {
                                     + "</td></tr><tr><td><span style='font-size:2em;'></b></font><b>En direction de </td><td><span style='font-size:2em;'></b>" 
                                     + data.journeys[0].sections[i].display_informations.direction 
                                     + "</td></tr></table></span><br />";
-                                   // Itineraire[i] =  Itineraire[i] + "<span style='font-size:2em;'><br /><br /><b>Partir de : </b>" + data.journeys[0].sections[i].from.name 
-                                   // + "(" + data.journeys[0].sections[i].from.stop_point.comment + ") <br /><b>vers </b>" 
-                                   // + data.journeys[0].sections[i].to.name + "(" + data.journeys[0].sections[i].to.stop_point.comment + ") .";
-                                   // Itineraire[i] = Itineraire[i] + "<br /><b>Prendre : </b><span style='color:#" + data.journeys[0].sections[i].display_informations.color + "'><b>" + data.journeys[0].sections[i].display_informations.network + " " + data.journeys[0].sections[i].display_informations.code + "</b></span><b><br />en direction de : </b>" + data.journeys[0].sections[i].display_informations.direction + " </span><br /><HR width=100% noshade size=1>";
                                 }
                                 if (data.journeys[0].sections[i].type == "street_network")
                                 {
@@ -75,8 +70,7 @@ Page {
                                     + "<tr><td><span style='font-size:2em;'><b>Pendant</b></td><span style='font-size:2em;'><td>" 
                                     + Math.round(data.journeys[0].sections[i].duration / 60) 
                                     + " minutes.</td></tr></table>" ;
-                                    //Itineraire[i] =  Itineraire[i] + "<br /><br /><span style='font-size:2em;'>Marcher de : " + data.journeys[0].sections[i].from.name + " vers " + data.journeys[0].sections[i].to.name + " pendant " + Math.round(data.journeys[0].sections[i].duration / 60) + " minutes.</span><HR width=100% noshade size=1>" ;
-                                }
+                              }
                             }
 
                             i = i + 1;
@@ -133,11 +127,6 @@ Page {
             visible: false
             accessibility.name: "myIndicator"
         }
-//    Label {
-//        id : affichage
-//        multiline: true
-//        textFormat: TextFormat.Html
-//    } 
         ScrollView {
             scrollViewProperties {
                 scrollMode: ScrollMode.Vertical
