@@ -63,7 +63,7 @@ Page {
                                 if (data.journeys[0].sections[i].type == "street_network")
                                 {
                                     Itineraire[i] =  Itineraire[i] 
-                                    + "<table><tr><td><span style='font-size:2em;'><b>Marché de<b></td><td><span style='font-size:2em;'>" 
+                                    + "<table><tr><td><span style='font-size:2em;'><b>Marcher de<b></td><td><span style='font-size:2em;'>" 
                                     + data.journeys[0].sections[i].from.name + "</td></tr>"
                                     + "<tr><td><span style='font-size:2em;'><b>Vers</b></td><td><span style='font-size:2em;'>" 
                                     + data.journeys[0].sections[i].to.name + "</td></tr>"

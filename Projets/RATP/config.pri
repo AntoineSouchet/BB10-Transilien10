@@ -44,6 +44,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/icons/facebook.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_add_bookmarks.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_bbm.png) \
+        $$quote($$BASEDIR/assets/images/icons/ic_browser.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_contact.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_edit.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_edit_profile.png) \

@@ -15,14 +15,14 @@ Page {
         Label {
             leftMargin: 10
             margin.leftOffset: 10
-            text: "Responsable du dévelopement : Antoine <br />Beta testeur/support : Allan <br />Visuel : Steven"
+            text: "<b>Responsable du dévelopement : </b>Antoine <br /><b>Beta testeur/support : </b>Allan <br /><b>Visuel : </b>Steven"
             multiline: true
             textFormat: TextFormat.Html
         }
         Label {
             leftMargin: 10
             margin.leftOffset: 10
-            text: "Avec la participation de la communauté des Addicts BlackBerry ( http://www.blackberry-10.fr/ )"
+            text: "Avec la participation de la communauté des <b>Addicts BlackBerry </b>( http://www.blackberry-10.fr/ )"
             multiline: true
             textFormat: TextFormat.Html
         }
@@ -35,7 +35,7 @@ Page {
         Label {
             leftMargin: 10
             margin.leftOffset: 10
-            text: "Application native pour OS BlackBerry 10 (10.3).<br />Utilisation de l'API de Navitio."
+            text: "Application native pour OS BlackBerry 10 (10.3).<br />Utilisation de l'API de Navitia. (http://navitia.io/)"
             multiline: true
             textFormat: TextFormat.Html
         }

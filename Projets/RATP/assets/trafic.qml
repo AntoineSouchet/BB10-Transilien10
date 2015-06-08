@@ -80,9 +80,24 @@ Page {
             scalingMethod: ScalingMethod.AspectFill
         }
         
+        
     }
+    
     onCreationCompleted: {
 
         getPerubation();
     }
+    actions: [ 
+        InvokeActionItem {
+            
+            query {
+                mimeType: "text/plain"
+                invokeActionId: "bb.action.SHARE"
+            }
+            onTriggered: {
+                data = "Etat du trafic RATP : "+ etat.text + " d'aprés l'application Transilien 10.";
+            }
+        }
+    
+    ]
 }

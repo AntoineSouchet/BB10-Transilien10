@@ -22,7 +22,7 @@ static const uint qt_meta_data_ApplicationUI[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -40,7 +40,8 @@ static const uint qt_meta_data_ApplicationUI[] = {
      260,   14,  252,   14, 0x02,
      271,   14,   14,   14, 0x02,
      281,   14,   14,   14, 0x02,
-     318,  310,   14,   14, 0x02,
+     296,   14,   14,   14, 0x02,
+     333,  325,   14,   14, 0x02,
 
        0        // eod
 };
@@ -54,8 +55,8 @@ static const char qt_meta_stringdata_ApplicationUI[] = {
     "MoreNear(double,double,QString)\0"
     "geoPositionInfo\0positionUpdated(QGeoPositionInfo)\0"
     "QString\0startGPS()\0BBWorld()\0"
-    "inviteUserToDownloadViaBBM()\0message\0"
-    "updatePersonalMessage(QString)\0"
+    "facebookOpen()\0inviteUserToDownloadViaBBM()\0"
+    "message\0updatePersonalMessage(QString)\0"
 };
 
 void ApplicationUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -72,8 +73,9 @@ void ApplicationUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 5: { QString _r = _t->startGPS();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
         case 6: _t->BBWorld(); break;
-        case 7: _t->inviteUserToDownloadViaBBM(); break;
-        case 8: _t->updatePersonalMessage((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 7: _t->facebookOpen(); break;
+        case 8: _t->inviteUserToDownloadViaBBM(); break;
+        case 9: _t->updatePersonalMessage((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -111,9 +113,9 @@ int ApplicationUI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     }
     return _id;
 }

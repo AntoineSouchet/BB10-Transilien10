@@ -6,13 +6,19 @@ import "libs/main.js" as Main
 NavigationPane { 
     
     function getNear() {
-
+        
+        myIndicator.visible = true;
         console.log("getNear");
         var position = _applicationUI.startGPS();
         var arrayPos = position.split(";");
         var lat = arrayPos[0];
         var longi = arrayPos[1];
         if (lat == "" && longi == "")
+        {
+            errorToast.body = "Impossible de géolocaliser votre BlackBerry.";
+            return false;
+        }
+        if (arrayPos == ";")
         {
             errorToast.body = "Impossible de géolocaliser votre BlackBerry.";
             return false;
@@ -89,7 +95,7 @@ Page {
 
     titleBar: 
     TitleBar {
-        title : "RATP BlackBerry 10"        
+        title : "Transilien 10"        
     }
     Container {
         id:root
@@ -174,7 +180,7 @@ Page {
         },
         ActionItem {
             title: "Notre facebook"
-            imageSource: "asset:///images/icons/Facebook_Logo_Button_128_96x96.png"
+            imageSource: "asset:///images/icons/ic_browser.png"
             onTriggered: {
                 _applicationUI.facebookOpen();
             }

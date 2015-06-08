@@ -136,7 +136,7 @@ Page {
         }
         Label {
             id : labelArrive
-            text : "Arrivé : "
+            text : "Arrivée : "
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
         }
