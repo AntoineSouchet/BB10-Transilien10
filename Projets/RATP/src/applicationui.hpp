@@ -56,10 +56,10 @@ public:
     Q_INVOKABLE QString startGPS();
     Q_INVOKABLE void BBWorld();
     Q_INVOKABLE void facebookOpen();
-    Q_INVOKABLE
-        void inviteUserToDownloadViaBBM();
-        Q_INVOKABLE
-        void updatePersonalMessage(const QString &message);
+//    Q_INVOKABLE
+//        void inviteUserToDownloadViaBBM();
+//        Q_INVOKABLE
+//        void updatePersonalMessage(const QString &message);
 private slots:
     void onSystemLanguageChanged();
 private:
@@ -69,12 +69,12 @@ private:
     QGeoPositionInfoSource *locationDataSource;
     QString lat;
     QString longi;
-    bb::platform::bbm::UserProfile * m_userProfile;
-           bb::platform::bbm::Context *m_context;
-           bb::platform::bbm::MessageService *m_messageService;
-           Q_SLOT
-           void registrationStateUpdated(
-                   bb::platform::bbm::RegistrationState::Type state);
+//    bb::platform::bbm::UserProfile * m_userProfile;
+//           bb::platform::bbm::Context *m_context;
+//           bb::platform::bbm::MessageService *m_messageService;
+//           Q_SLOT
+//           void registrationStateUpdated(
+//                   bb::platform::bbm::RegistrationState::Type state);
 };
 
 #endif /* ApplicationUI_HPP_ */

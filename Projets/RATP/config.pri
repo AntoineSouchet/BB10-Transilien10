@@ -53,6 +53,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/icons/ic_history.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_map.png) \
         $$quote($$BASEDIR/assets/images/icons/ic_move.png) \
+        $$quote($$BASEDIR/assets/images/icons/ic_zoom_in.png) \
         $$quote($$BASEDIR/assets/images/logo.jpg) \
         $$quote($$BASEDIR/assets/images/logo_navitia-io.png) \
         $$quote($$BASEDIR/assets/images/logos/1024x600.png) \
@@ -68,9 +69,12 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/logos/96x96.png) \
         $$quote($$BASEDIR/assets/images/logos/Feature-Image-1920x1186.png) \
         $$quote($$BASEDIR/assets/images/logos/RATP.png) \
+        $$quote($$BASEDIR/assets/images/logos/ic_zoom_in.png) \
+        $$quote($$BASEDIR/assets/images/map/metro-paris.gif) \
         $$quote($$BASEDIR/assets/itineraire.qml) \
         $$quote($$BASEDIR/assets/libs/main.js) \
         $$quote($$BASEDIR/assets/main.qml) \
+        $$quote($$BASEDIR/assets/map.qml) \
         $$quote($$BASEDIR/assets/trafic.qml)
 }
 
@@ -105,6 +109,9 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/images/logos/*.qml) \
         $$quote($$BASEDIR/../assets/images/logos/*.js) \
         $$quote($$BASEDIR/../assets/images/logos/*.qs) \
+        $$quote($$BASEDIR/../assets/images/map/*.qml) \
+        $$quote($$BASEDIR/../assets/images/map/*.js) \
+        $$quote($$BASEDIR/../assets/images/map/*.qs) \
         $$quote($$BASEDIR/../assets/libs/*.qml) \
         $$quote($$BASEDIR/../assets/libs/*.js) \
         $$quote($$BASEDIR/../assets/libs/*.qs)

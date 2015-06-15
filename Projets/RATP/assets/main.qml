@@ -172,17 +172,11 @@ Page {
             }
         },
         ActionItem {
-            title: "BBM Status"
-            imageSource: "asset:///images/icons/ic_edit_profile.png"
+            title: "Carte"
+            imageSource: "asset:///images/icons/ic_zoom_in.png"
             onTriggered: {
-                _applicationUI.updatePersonalMessage("Utilise l'application Transilien 10.")
-            }
-        },
-        ActionItem {
-            title: "Notre facebook"
-            imageSource: "asset:///images/icons/ic_browser.png"
-            onTriggered: {
-                _applicationUI.facebookOpen();
+                var page = mapPage.createObject();
+                nav.push(page);
             }
         },
         InvokeActionItem {
@@ -205,6 +199,10 @@ Page {
     ComponentDefinition {
         id: itinerairePage
         source: "itineraire.qml"
+    },
+    ComponentDefinition {
+        id: mapPage
+        source : "map.qml"
     },
     SystemToast {
         id: errorToast

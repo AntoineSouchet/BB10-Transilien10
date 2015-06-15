@@ -1,5 +1,5 @@
 1
-36
+40
 aPropos.qml
 finalItineraire.qml
 images/icons/check.png
@@ -17,6 +17,7 @@ images/icons/ic_help.png
 images/icons/ic_history.png
 images/icons/ic_map.png
 images/icons/ic_move.png
+images/icons/ic_zoom_in.png
 images/logo.jpg
 images/logos/1024x600.png
 images/logos/110x110.png
@@ -30,9 +31,12 @@ images/logos/86x86.png
 images/logos/90x90.png
 images/logos/96x96.png
 images/logos/Feature-Image-1920x1186.png
+images/logos/ic_zoom_in.png
 images/logos/RATP.png
 images/logo_navitia-io.png
+images/map/metro-paris.gif
 itineraire.qml
 libs/main.js
 main.qml
+map.qml
 trafic.qml
