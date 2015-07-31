@@ -74,6 +74,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/itineraire.qml) \
         $$quote($$BASEDIR/assets/libs/main.js) \
         $$quote($$BASEDIR/assets/main.qml) \
+        $$quote($$BASEDIR/assets/map.html) \
         $$quote($$BASEDIR/assets/map.qml) \
         $$quote($$BASEDIR/assets/trafic.qml)
 }

@@ -95,12 +95,12 @@ Page {
 
     titleBar: 
     TitleBar {
-        title : "Transilien 10"        
+        title : "Paris Transports 10"        
     }
     Container {
         id:root
         Label {
-            text:"Bienvenue dans l'application Transilien 10 pour BlackBerry."
+            text:"Bienvenue dans l'application Paris Transports 10 pour BlackBerry."
             minHeight: 15
             multiline: true
             verticalAlignment: VerticalAlignment.Center
@@ -186,7 +186,7 @@ Page {
                 invokeActionId: "bb.action.SHARE"
             }
             onTriggered: {
-                data = "J'utilise l'application Transilien 10 pour BlackBerry !";
+                data = "J'utilise l'application Paris Transports 10 pour BlackBerry !";
             }
         }
         
